@@ -43,7 +43,7 @@ def get_json(share_code, cookie):
 def parse_json(data):
     # cookie无效
     if data['retcode'] == -100:
-        print('cookie无效，请重新获取输入')
+        print('cookie无效，请重新获取')
         get_cookie(True)
         get_furniture_list()
     # 其他错误
@@ -51,7 +51,7 @@ def parse_json(data):
         exit_by_tips(data['message'])
     res = []
     for furniture in data['data']['list'] + data['data']['not_calc_list']:
-        url = jump = ''
+        jump = ''
         if furniture["wiki_url"] != "":
             url = re.sub(r'\?.*$', '', furniture["wiki_url"])
             jump = '=HYPERLINK(\"' + url + '\", \"跳转\")'
@@ -68,7 +68,7 @@ def out_excel(data, share_code):
     for row in data:
         ws.append(row)
 
-    # 着色
+    # 稀有度和拥有数量达标的条件格式
     rule = ColorScaleRule(start_type='num', start_value=2, start_color='ffc9e8a8',
                           mid_type='num', mid_value=3, mid_color='ff6ddbff',
                           end_type='num', end_value=4, end_color='ffcaa8e5')
@@ -79,7 +79,7 @@ def out_excel(data, share_code):
     ws.conditional_formatting.add(f'C2:C{len(data) + 1}',
                                   CellIsRule(operator='greaterThanOrEqual', formula=['$D2'], fill=green_fill))
 
-    # 数据条
+    # 所需数量数据条
     rule = DataBarRule(start_type='num', start_value=0, end_type='num', end_value=max(row[3] for row in data),
                        color="FFfcd5b4")
     ws.conditional_formatting.add(f'D2:D{len(data) + 1}', rule)
@@ -96,7 +96,7 @@ def out_excel(data, share_code):
             cell.font = font
             cell.alignment = alignment
 
-    # 列宽
+    # 摆设名称列宽
     ws.column_dimensions['B'].width = 25
 
     # 冻结首行
@@ -120,13 +120,10 @@ def get_furniture_list():
     cookie = get_cookie()
     print('洞天摹数', end=': ')
     share_code = input().strip()
-    if not re.search(r'\d{10,11}', share_code):
-        print('输入有误，请重新输入')
     json_data = get_json(share_code, cookie)
     res = parse_json(json_data)
     out_excel(res, share_code)
-    # print(*res, sep='\n')
-    print('获取完成，正在打开 Excel\n')
+    print(f'获取完成，正在打开 {share_code}.xlsx\n')
     os.startfile(f'{share_code}.xlsx')
 
 

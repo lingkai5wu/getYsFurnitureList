@@ -20,22 +20,23 @@
    ![image-20230206160510645](README.assets/image-20230206160510645.png)
 
 4. 输入获取的洞天摹数，回车运行。程序应该会自动完成获取，并打开Excel。
-   ![image-20230206161927319](README.assets/image-20230206161927319.png)
+   <img src="README.assets/image-20230206161927319.png" alt="image-20230206161927319" style="zoom:67%;" />
 
 5. 在游戏中使用摹本，将相应已有摆设的数量录入表格即可。
-   ![image-20230206162230531](README.assets/image-20230206162230531.png)
+   <img src="README.assets/image-20230206162230531.png" alt="image-20230206162230531" style="zoom: 40%;" />
 
 ### 额外说明
 
-Excel 的布局和取色参考了[这位大佬](https://nga.178.com/nuke.php?func=ucp&__inchst=UTF-8&uid=8529609)的赠礼套装工具表（https://nga.178.com/read.php?tid=34126505），用法大致相同。
+Excel 的布局和取色参考了[这位大佬](https://nga.178.com/nuke.php?func=ucp&__inchst=UTF-8&uid=8529609)的[赠礼套装工具表](https://nga.178.com/read.php?tid=34126505)，用法大致相同。
 
-- 本项目开源，您的数据全部保存在本地，不存在主动泄露的风险，您可以拉取源码使用。
-- 首次运行后会得到另外两个文件，getYsFurnitureList.exe 是程序本体，config.ini 是程序的配置文件，明文保存有您的cookie信息；17286543532.xlsx
-  是以洞天摹数命名的 Excel 文件。
+- 本项目开源，您的数据全部保存在本地，不存在主动泄露的风险。
+- 首次运行后会得到另外两个文件，config.ini 是程序的配置文件，明文保存您的cookie信息；17286543532.xlsx 是以洞天摹数命名的 Excel 文件。
   ![image-20230206163053810](README.assets/image-20230206163053810.png)
-
+  
 - Tips: 摆设的拥有数量大于或等于所需数量时显示绿底
   ![image-20230206162640978](README.assets/image-20230206162640978.png)
+- Tips: 摆设名称严格对应，可以直接复制单元格，粘贴到搜索摆设中搜索。
+  <img src="README.assets/image-20230206225516050.png" alt="image-20230206225516050" style="zoom:50%;" />
 - Tips: 跳转按钮是超链接，单击能够跳转到对应摆设的 Wiki，方便查看获取途径等信息。
   ![image-20230206162651406](README.assets/image-20230206162651406.png)
 - 摆设的默认排序规则是先根据星级升序、再根据所需数量升序、最后根据ID升序。
@@ -51,11 +52,13 @@ Excel 的布局和取色参考了[这位大佬](https://nga.178.com/nuke.php?fun
 
 URL: https://api-takumi.mihoyo.com/event/e20200928calculate/v1/furniture/blueprint
 
-必传参数
+#### 必传参数
 
 | key        | value        | 说明         |
 | ---------- | ------------ | ------------ |
 | region     | cn_gf01      | 可能是服务器 |
 | share_code | 10或11位数字 | 洞天摹数     |
 
-所需cookie: cookie_token 和 account_id，经测试只需要这两个对应。
+#### 所需cookie
+
+cookie_token 和 account_id，经测试只需要这两个cookie对应。
