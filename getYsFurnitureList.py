@@ -120,7 +120,6 @@ def get_furniture_list():
     cookie = get_cookie()
     print('洞天摹数', end=': ')
     share_code = input().strip()
-    share_code = '17286543532'
     if not re.search(r'\d{10,11}', share_code):
         print('输入有误，请重新输入')
     json_data = get_json(share_code, cookie)
@@ -132,7 +131,6 @@ def get_furniture_list():
 
 
 if __name__ == '__main__':
-    print('教程、反馈地址: https://nga.178.com/read.php?tid=35293711')
     print('项目地址: https://github.com/lingkai5wu/getYsFurnitureList')
     print('Tips: 可右键直接粘贴最近复制的内容\n')
     get_furniture_list()
