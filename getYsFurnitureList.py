@@ -7,6 +7,7 @@ import openpyxl
 import requests
 from openpyxl.formatting.rule import ColorScaleRule, CellIsRule, DataBarRule
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Font
+from requests import JSONDecodeError
 
 
 def get_cookie(need_new=False):
@@ -31,13 +32,14 @@ def get_json(share_code, cookie):
         'share_code': share_code,
         'region': 'cn_gf01'
     }
-    headers = {
-        'cookie': cookie
-    }
+    headers = {'cookie': cookie}
+    proxies = {"http": None, "https": None}
+    resp = requests.get(url, params, headers=headers, proxies=proxies)
     try:
-        return requests.get(url, params, headers=headers).json()
-    except requests.exceptions.SSLError:
-        exit_by_tips('请关闭系统代理后重试')
+        return resp.json()
+    except JSONDecodeError:
+        print(resp.content)
+        exit_by_tips('解析出错，接口返回不符合预期')
 
 
 def parse_json(data):
@@ -130,4 +132,8 @@ def get_furniture_list():
 if __name__ == '__main__':
     print('项目地址: https://github.com/lingkai5wu/getYsFurnitureList')
     print('Tips: 可右键直接粘贴最近复制的内容\n')
-    get_furniture_list()
+    try:
+        get_furniture_list()
+    except Exception as e:
+        print(repr(e))
+        exit_by_tips('未知错误')
