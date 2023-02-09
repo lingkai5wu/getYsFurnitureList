@@ -61,9 +61,4 @@ URL: https://api-takumi.mihoyo.com/event/e20200928calculate/v1/furniture/bluepri
 
 #### 所需cookie
 
-cookie_token 和 account_id，经测试只需要这两个cookie对应。
-
-### 已知问题
-
-1. 未知情况导致部分请求返回Forbidden，暂时没有解决办法
-   ![image-20230209131428484](README.assets/image-20230209131428484.png)
+cookie_token 和 account_id，经测试只需要这两个cookie对应，但需要注意 cookie_token 的过期时间。

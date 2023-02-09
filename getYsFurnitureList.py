@@ -32,7 +32,10 @@ def get_json(share_code, cookie):
         'share_code': share_code,
         'region': 'cn_gf01'
     }
-    headers = {'cookie': cookie}
+    headers = {
+        'cookie': cookie,
+        'Referer': 'https://webstatic.mihoyo.com/'
+    }
     proxies = {"http": None, "https": None}
     resp = requests.get(url, params, headers=headers, proxies=proxies)
     try:
@@ -45,7 +48,7 @@ def get_json(share_code, cookie):
 def parse_json(data):
     # cookie无效
     if data['retcode'] == -100:
-        print('cookie无效，请重新获取')
+        print('cookie已过期，请重新登录后获取')
         get_cookie(True)
         get_furniture_list()
     # 其他错误
@@ -122,6 +125,7 @@ def get_furniture_list():
     cookie = get_cookie()
     print('洞天摹数', end=': ')
     share_code = input().strip()
+    share_code = '17286543532'
     json_data = get_json(share_code, cookie)
     res = parse_json(json_data)
     out_excel(res, share_code)
