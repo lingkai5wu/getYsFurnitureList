@@ -125,7 +125,7 @@ def get_furniture_list():
     cookie = get_cookie()
     print('洞天摹数', end=': ')
     share_code = input().strip()
-    share_code = '17286543532'
+    # share_code = '17286543532'
     json_data = get_json(share_code, cookie)
     res = parse_json(json_data)
     out_excel(res, share_code)
